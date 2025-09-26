@@ -93,7 +93,7 @@ app.get('/', (req, res) => {
 });
 
 // 404 handler
-app.use('*', (req, res) => {
+app.use((req, res) => {
   res.status(404).json({
     error: 'Endpoint not found',
     path: req.originalUrl,
