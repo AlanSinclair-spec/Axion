@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Health check route
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response) => {
   res.json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
@@ -31,7 +31,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Root route
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.json({
     name: 'HVAC Phone Agent API',
     version: '1.0.0',
@@ -48,18 +48,18 @@ app.get('/', (req, res) => {
 });
 
 // Basic webhook endpoints
-app.post('/api/webhooks/vapi', (req, res) => {
+app.post('/api/webhooks/vapi', (req: Request, res: Response) => {
   console.log('Vapi webhook received:', req.body);
   res.json({ success: true });
 });
 
-app.post('/api/webhooks/telnyx/voice', (req, res) => {
+app.post('/api/webhooks/telnyx/voice', (req: Request, res: Response) => {
   console.log('Telnyx webhook received:', req.body);
   res.json({ success: true });
 });
 
 // 404 handler
-app.use('*', (req, res) => {
+app.use('*', (req: Request, res: Response) => {
   res.status(404).json({
     error: 'Endpoint not found',
     path: req.originalUrl,
@@ -68,7 +68,7 @@ app.use('*', (req, res) => {
 });
 
 // Error handler
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error('Error:', err);
   res.status(err.status || 500).json({
     error: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message
