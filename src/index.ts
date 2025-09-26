@@ -47,16 +47,17 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-// Basic webhook endpoints
-app.post('/api/webhooks/vapi', (req: Request, res: Response) => {
-  console.log('Vapi webhook received:', req.body);
-  res.json({ success: true });
-});
+// Import call handler
+import { CallHandlerController } from './controllers/call-handler';
 
-app.post('/api/webhooks/telnyx/voice', (req: Request, res: Response) => {
-  console.log('Telnyx webhook received:', req.body);
-  res.json({ success: true });
-});
+const callHandler = new CallHandlerController();
+
+// Enhanced webhook endpoints with proper call routing
+app.post('/api/webhooks/vapi', callHandler.handleVapiWebhook.bind(callHandler));
+app.post('/api/webhooks/telnyx/voice', callHandler.handleTelnyxCall.bind(callHandler));
+
+// Test endpoint for debugging
+app.get('/api/test-call', callHandler.testCall.bind(callHandler));
 
 // 404 handler
 app.use((req: Request, res: Response) => {
