@@ -59,7 +59,7 @@ app.post('/api/webhooks/telnyx/voice', (req: Request, res: Response) => {
 });
 
 // 404 handler
-app.use('*', (req: Request, res: Response) => {
+app.use((req: Request, res: Response) => {
   res.status(404).json({
     error: 'Endpoint not found',
     path: req.originalUrl,
