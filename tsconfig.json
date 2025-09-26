@@ -10,6 +10,8 @@
     "allowJs": true,
     "outDir": "./dist",
     "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
     "removeComments": true,
     "typeRoots": ["node_modules/@types"],
     "sourceMap": true,
@@ -22,6 +24,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
+  "include": ["src/index.ts", "src/config/telnyx.ts", "src/services/telnyx.ts", "src/types/index.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "src/controllers", "src/middleware", "src/models", "src/services/appointment.ts", "src/services/call-monitor.ts", "src/services/hvac-intelligence.ts", "src/services/lead.ts", "src/services/vapi.ts", "src/utils", "src/index-full.ts"]
 }

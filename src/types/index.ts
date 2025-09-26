@@ -7,6 +7,8 @@ export interface HVACCompany {
   businessHours: BusinessHours;
   services: HVACService[];
   emergencyRates: EmergencyRates;
+  telnyx_phone_number?: string;
+  vapi_assistant_id?: string;
   createdAt: Date;
   updatedAt: Date;
 }

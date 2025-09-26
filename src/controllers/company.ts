@@ -9,7 +9,7 @@ const vapiService = new VapiService();
 const telnyxService = new TelnyxService();
 
 export class CompanyController {
-  async createCompany(req: Request, res: Response) {
+  async createCompany(req: Request, res: Response): Promise<void> {
     try {
       const companyData = req.body;
 
